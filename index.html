@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DS MAX SAANJH</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<script>
+    var apiEndPointUrl = 'https://safe-temple-99953.herokuapp.com';
+
+    function loginHandler() {
+        if (this.status == 200) {
+            window.location.href = 'order.html';
+        } else {
+            alert('Something went wrong!!');
+        }
+    }
+
+    function authenticateUser() {
+        var user = document.getElementById('login_userName').value;
+        var pass = document.getElementById('login_userPassword').value;
+        var loginUrl = apiEndPointUrl + '/login?' + 'user=' + user + '&pass=' + pass;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onload = loginHandler;
+        xhr.open('GET', loginUrl);
+        xhr.send();
+    }
+</script>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center " style="padding:2%;">
+            <h2>Application</h2>
+            <h4>Contact list </h4>
+        </div>
+        <hr>
+        <div class="form-group">
+
+            <label>Search</label>
+
+            <input placeholder="Number" class="form-control" />
+        </div>
+        <h4>Add your detail</h4>
+
+        <div class="well">
+            <div class="wells">
+                <div class="form-inline">
+                    <label>Number</label>
+                    <div class="form-group">
+                        <input placeholder="  Number" class="form-control" />
+
+                    </div>
+                </div>
+            </div>
+            <h5>Person 1</h5>
+
+            <div class="well">
+                <label>Name</label>
+                <div class="form-group">
+                    <input placeholder="  Name" class="form-control" />
+                </div>
+                <label>Contact Number</label>
+                <div class="form-group">
+                    <input placeholder="  Number" class="form-control" />
+                </div>
+                <label>Email</label>
+                <div class="form-group">
+                    <input placeholder="  Number" class="form-control" />
+                </div>
+            </div>
+            <div style="display:none;">
+                <h5>Person 2</h5>
+                <div class="well">
+
+                    <label>Name</label>
+                    <div class="form-group">
+                        <input placeholder="  Number" class="form-control" />
+                    </div>
+                    <label>Contact Number</label>
+                    <div class="form-group">
+                        <input placeholder="  Number" class="form-control" />
+                    </div>
+                    <label>Email</label>
+                    <div class="form-group">
+                        <input placeholder="  Number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+
+            <button id="login_submit" type="submit" class="btn btn-primary" onclick="authenticateUser()">Login</button>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+    </div>
+</body>
+
+</html>
