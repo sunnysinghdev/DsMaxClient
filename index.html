@@ -3,34 +3,17 @@
 
 <head>
     <title>DS MAX SAANJH</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#24292e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
 </head>
-<script>
-    var apiEndPointUrl = 'https://safe-temple-99953.herokuapp.com';
-
-    function loginHandler() {
-        if (this.status == 200) {
-            window.location.href = 'order.html';
-        } else {
-            alert('Something went wrong!!');
-        }
-    }
-
-    function authenticateUser() {
-        var user = document.getElementById('login_userName').value;
-        var pass = document.getElementById('login_userPassword').value;
-        var loginUrl = apiEndPointUrl + '/login?' + 'user=' + user + '&pass=' + pass;
-
-        var xhr = new XMLHttpRequest();
-        xhr.onload = loginHandler;
-        xhr.open('GET', loginUrl);
-        xhr.send();
-    }
-</script>
 
 <body>
     <div class="container">
@@ -40,20 +23,19 @@
         </div>
         <hr>
         <div class="form-group">
-
             <label>Search</label>
+            <input id="search" placeholder="Enter Number" class="form-control" />
+            <button id="btn_search" type="button" class="btn btn-primary" onclick="search();">Search</button>
 
-            <input placeholder="Number" class="form-control" />
         </div>
         <h4>Add your detail</h4>
-
+        <div id="result"></div>
         <div class="well">
             <div class="wells">
                 <div class="form-inline">
                     <label>Number</label>
                     <div class="form-group">
-                        <input placeholder="  Number" class="form-control" />
-
+                        <input id="flat_number" placeholder="  Number" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -62,15 +44,15 @@
             <div class="well">
                 <label>Name</label>
                 <div class="form-group">
-                    <input placeholder="  Name" class="form-control" />
+                    <input id="owner" placeholder="  Name" class="form-control" />
                 </div>
                 <label>Contact Number</label>
                 <div class="form-group">
-                    <input placeholder="  Number" class="form-control" />
+                    <input id="mobile_1" placeholder="  Number" class="form-control" />
                 </div>
                 <label>Email</label>
                 <div class="form-group">
-                    <input placeholder="  Number" class="form-control" />
+                    <input id="email_1" placeholder="  Number" class="form-control" />
                 </div>
             </div>
             <div style="display:none;">
@@ -79,32 +61,27 @@
 
                     <label>Name</label>
                     <div class="form-group">
-                        <input placeholder="  Number" class="form-control" />
+                        <input id="co_owner" placeholder="  Number" class="form-control" />
                     </div>
                     <label>Contact Number</label>
                     <div class="form-group">
-                        <input placeholder="  Number" class="form-control" />
+                        <input id="mobile_2" placeholder="  Number" class="form-control" />
                     </div>
                     <label>Email</label>
                     <div class="form-group">
-                        <input placeholder="  Number" class="form-control" />
+                        <input id="email_2" placeholder="  Number" class="form-control" />
                     </div>
                 </div>
             </div>
 
 
-            <button id="login_submit" type="submit" class="btn btn-primary" onclick="authenticateUser()">Login</button>
+            <button id="login_submit" type="submit" class="btn btn-primary" onclick="add();">Login</button>
 
 
         </div>
 
     </div>
 
-
-
-
-
-    </div>
 </body>
 
 </html>
