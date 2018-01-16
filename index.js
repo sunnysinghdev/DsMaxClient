@@ -5,8 +5,10 @@ function add() {
     function handler() {
         if (this.status == 200) {
             var rawdata = this.response;
-            getId("status").value = rawdata;
+            reloadData();
+            getId("status").innerHTML = rawdata;
         } else {
+            getId("status").innerHTML = this.status;
 
         }
     }
@@ -24,9 +26,9 @@ function add() {
     xhr.onload = handler;
     xhr.open('POST', apiEndPointUrl + '/dsmax/db/insert');
     xhr.setRequestHeader('Content-type', 'application/json');
-    alert(JSON.stringify(obj));
+    //alert(JSON.stringify(obj));
     //alert(obj)
-    //xhr.send(JSON.stringify(obj));
+    xhr.send(JSON.stringify(obj));
 };
 
 function getId(id) {
@@ -38,15 +40,14 @@ function reloadData() {
         if (this.status == 200) {
             // success!
             var rawdata = this.response;
-            //alert(rawdata);
-            //document.getElementById("output").value = rawdata;
+            // getId("status").innerText = rawdata;
             var arr = JSON.parse(rawdata);
-
+            var count = 0;
             for (var index in arr) {
                 contacts[arr[index].flat_number] = arr[index];
+                count++;
             }
-            //var dataJson = JSON.parse(rawdata);
-            //createStoreList(dataJson);
+            getId("count").innerText = count;
         } else {
 
         }
@@ -58,37 +59,44 @@ function reloadData() {
     xhr.send();
 };
 
+
+
 function search() {
     var num = getId("search").value.trim();
+    var fill = "*N/A*";
+
     if (contacts.hasOwnProperty(num)) {
-        alert(contacts[num].owner);
+        var contact = contacts[num];
+
+        function onReadDetail() {
+            if (this.status == 200) {
+                // success!
+                var rawdata = this.response;
+                for (var key in contact) {
+                    rawdata = rawdata.replace("$" + key, contact[key]);
+                }
+                //rawdata = rawdata.replace("$flat_number", contact.flat_number);
+                rawdata = rawdata.replace("$owner", fill);
+                rawdata = rawdata.replace("$co_owner", fill);
+                rawdata = rawdata.replace("$mobile_1", fill);
+                rawdata = rawdata.replace("$mobile_2", fill);
+                rawdata = rawdata.replace("$email_1", fill);
+                rawdata = rawdata.replace("$email_2", fill);
+
+                getId("result").innerHTML = rawdata;
+
+            } else {
+
+            }
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onload = onReadDetail;
+        xhr.open('GET', 'detail.html');
+        xhr.send();
+
     } else {
         alert("No found");
     }
-    getId("result").innerHTML = '<div class="well">' +
-        '<div class="wells">' +
-        '<div class="form-inline">' +
-        '<label>Number</label>' +
-        '<div class="form-group">' +
-        '<input id="flat_number" placeholder="  Number" class="form-control" />' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<h5>Person 1</h5>' +
 
-        '<div class="well">' +
-        '<label>' + contacts[num].owner + '</label>' +
-        '<div class="form-group">' +
-        '<input id="owner" placeholder="  Name" class="form-control" />' +
-        '</div>' +
-        '<label>Contact Number</label>' +
-        '<div class="form-group">' +
-        '<input id="mobile_1" placeholder="  Number" class="form-control" />' +
-        '</div>' +
-        '<label>Email</label>' +
-        '<div class="form-group">' +
-        '<input id="email_1" placeholder="  Number" class="form-control" />' +
-        '</div>' +
-        '</div>';
 }
 reloadData();
