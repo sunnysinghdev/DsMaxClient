@@ -1,5 +1,17 @@
-var contacts = {};
+var Contacts = {};
+var ContactSchema = {
+    flat_number: 0,
+    owner: "",
+    co_owner: "",
+    mobile_1: "",
+    mobile_2: "",
+    email_1: "",
+    email_2: "",
+    work_1: "",
+    work_2: ""
+};
 var apiEndPointUrl = 'https://dsmax.herokuapp.com';
+//var apiEndPointUrl = 'http://localhost:8081';
 
 function add() {
     function handler() {
@@ -30,21 +42,25 @@ function add() {
     //alert(obj)
     xhr.send(JSON.stringify(obj));
 };
-function loadData(){
+
+function loadData() {
     var num = getId("search").value.trim();
     var fill = "";
 
-    if (contacts.hasOwnProperty(num)) {
-        var contact = contacts[num];
+    if (Contacts.hasOwnProperty(num)) {
+        var contact = Contacts[num];
 
         for (var key in contact) {
-                getId(key).value = contact[key];
+            var feild = getId(key);
+            if (feild)
+                feild.value = contact[key];
         }
 
     } else {
-        alert("No found");
+        alert("Not found");
     }
 }
+
 function update() {
     function handler() {
         if (this.status == 200) {
@@ -58,19 +74,19 @@ function update() {
     }
 
     var obj = {};
-    obj.flat_number = getId("flat_number").value;
-    obj.owner = getId("owner").value;
-    obj.co_owner = getId("co_owner").value;
-    obj.mobile_1 = getId("mobile_1").value;
-    obj.mobile_2 = getId("mobile_2").value;
-    obj.email_1 = getId("email_1").value;
-    obj.email_2 = getId("email_2").value;
+    for (var key in ContactSchema) {
+        var feild = getId(key);
+        if (feild) {
+            obj[key] = feild.value;
+            console.log(key + "=" + obj[key]);
+        }
+    }
 
     var xhr = new XMLHttpRequest();
     xhr.onload = handler;
     xhr.open('POST', apiEndPointUrl + '/dsmax/db/update');
     xhr.setRequestHeader('Content-type', 'application/json');
-    //alert(JSON.stringify(obj));
+    console.log(JSON.stringify(obj));
     //alert(obj)
     xhr.send(JSON.stringify(obj));
 };
@@ -88,7 +104,7 @@ function reloadData() {
             var arr = JSON.parse(rawdata);
             var count = 0;
             for (var index in arr) {
-                contacts[arr[index].flat_number] = arr[index];
+                Contacts[arr[index].flat_number] = arr[index];
                 count++;
             }
             getId("count").innerText = count;
@@ -109,8 +125,8 @@ function search() {
     var num = getId("search").value.trim();
     var fill = "*N/A*";
 
-    if (contacts.hasOwnProperty(num)) {
-        var contact = contacts[num];
+    if (Contacts.hasOwnProperty(num)) {
+        var contact = Contacts[num];
 
         function onReadDetail() {
             if (this.status == 200) {
