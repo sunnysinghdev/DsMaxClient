@@ -30,6 +30,50 @@ function add() {
     //alert(obj)
     xhr.send(JSON.stringify(obj));
 };
+function loadData(){
+    var num = getId("search").value.trim();
+    var fill = "";
+
+    if (contacts.hasOwnProperty(num)) {
+        var contact = contacts[num];
+
+        for (var key in contact) {
+                getId(key).value = contact[key];
+        }
+
+    } else {
+        alert("No found");
+    }
+}
+function update() {
+    function handler() {
+        if (this.status == 200) {
+            var rawdata = this.response;
+            reloadData();
+            getId("status").innerHTML = rawdata;
+        } else {
+            getId("status").innerHTML = this.status;
+
+        }
+    }
+
+    var obj = {};
+    obj.flat_number = getId("flat_number").value;
+    obj.owner = getId("owner").value;
+    obj.co_owner = getId("co_owner").value;
+    obj.mobile_1 = getId("mobile_1").value;
+    obj.mobile_2 = getId("mobile_2").value;
+    obj.email_1 = getId("email_1").value;
+    obj.email_2 = getId("email_2").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = handler;
+    xhr.open('POST', apiEndPointUrl + '/dsmax/db/update');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    //alert(JSON.stringify(obj));
+    //alert(obj)
+    xhr.send(JSON.stringify(obj));
+};
 
 function getId(id) {
     return document.getElementById(id);
