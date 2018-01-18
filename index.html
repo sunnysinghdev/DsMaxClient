@@ -12,90 +12,87 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
     <script src="index.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron text-center " style="padding:2%;">
-            <h2>Application</h2>
+            <h3>Ds Max Saanjh</h3>
             <h4>Contact list (<span id="count"></span>) </h4>
         </div>
         <hr>
         <div class="row" style="padding-bottom:15px;">
 
-            <div class="col-xs-9">
-                <input id="search" placeholder="Enter Number" class="form-control" />
-            </div>
-            <div class="col-xs-3">
-                <button id="btn_search" type="button" class="btn btn-primary" onclick="search();">Search</button>
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input type="nubmer" class="form-control" id="search" placeholder="Flat Number" value="">
+                    <span class="input-group-addon" onclick="search();"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
             </div>
         </div>
 
         <div id="result"></div>
-        <div id="not_found">
-            <div class="not_"> </div>
-                <div id="add_detail" style="display:none;">
-                    <h4>Add your detail <button class="">Add</button></h4>
-
-                    <div class="well">
-                        <div class="wells">
-                            <div class="form-inline">
-                                <label>Number</label>
-                                <div class="form-group">
-                                    <input id="flat_number" placeholder="  Number" class="form-control" />
-                                </div>
-                            </div>
+        <div id="add_contact" class="row" style="display:none;">
+            <div class="col-xs-12">
+                <h4>Please add yor detail</h4>
+                <div class="well">
+                    <div class="row">
+                        <h5>Flat Number</h5>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input id="flat_number" placeholder="  Number" class="form-control" />
                         </div>
-                        <h5>Person 1</h5>
-
-                        <div class="well">
-                            <label>Name</label>
-                            <div class="form-group">
-                                <input id="owner" placeholder="  Name" class="form-control" />
-                            </div>
-                            <label>Contact Number</label>
-                            <div class="form-group">
-                                <input id="mobile_1" placeholder="  Number" class="form-control" />
-                            </div>
-                            <label>Email</label>
-                            <div class="form-group">
-                                <input id="email_1" placeholder="  Number" class="form-control" />
-                            </div>
-                        </div>
-                        <div style="">
-                            <h5>Person 2</h5>
-                            <div class="well">
-
-                                <label>Name</label>
-                                <div class="form-group">
-                                    <input id="co_owner" placeholder="  Number" class="form-control" />
-                                </div>
-                                <label>Contact Number</label>
-                                <div class="form-group">
-                                    <input id="mobile_2" placeholder="  Number" class="form-control" />
-                                </div>
-                                <label>Email</label>
-                                <div class="form-group">
-                                    <input id="email_2" placeholder="  Number" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <button id="login_submit" type="submit" class="btn btn-primary" onclick="add();">Login</button>
-
 
                     </div>
-                </div>
-                <div class="row">
-                    <p id="status"></p>
-                </div>
 
+                    <div class="row">
+                        <h5>Owner</h5>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="owner" placeholder="Ownern's Name" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                            <input id="mobile_1" placeholder="Phone number" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input id="email_1" placeholder="Email Address" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5>Co-owner</h5>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="co_owner" placeholder="Co-owner's Name" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                            <input id="mobile_2" placeholder="Mobile Number" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input id="email_2" placeholder="Email Address" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p></p>
+                        <button id="login_submit" type="submit" class="btn btn-primary form-control" onclick="add();">Add</button>
+
+                    </div>
+
+                </div>
             </div>
-            <footer class="footer navbar-fixed-bottom">
+        </div>
+    </div>
 
-            </footer>
+    </div>
+    <footer class="footer navbar-fixed-bottom">
+    </footer>
 </body>
 
 </html>

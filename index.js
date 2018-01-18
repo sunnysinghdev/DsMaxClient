@@ -14,25 +14,39 @@ var apiEndPointUrl = 'https://dsmax.herokuapp.com';
 //var apiEndPointUrl = 'http://localhost:8081';
 
 function add() {
+    getId("result").innerHTML = "";
+
     function handler() {
         if (this.status == 200) {
             var rawdata = this.response;
             reloadData();
-            getId("status").innerHTML = rawdata;
         } else {
-            getId("status").innerHTML = this.status;
 
         }
     }
-
     var obj = {};
-    obj.flat_number = getId("flat_number").value;
-    obj.owner = getId("owner").value;
-    obj.co_owner = getId("co_owner").value;
-    obj.mobile_1 = getId("mobile_1").value;
-    obj.mobile_2 = getId("mobile_2").value;
-    obj.email_1 = getId("email_1").value;
-    obj.email_2 = getId("email_2").value;
+    for (var key in ContactSchema) {
+        var feild = getId(key);
+        if (feild) {
+            obj[key] = feild.value;
+            feild.value = "";
+        }
+    }
+    var flat_num = parseInt(obj.flat_number);
+    if (flat_num > 0 && flat_num < 441) {
+        obj.flat_number = flat_num;
+    } else {
+        alert("Invalid flat number");
+        return;
+    }
+
+    // obj.flat_number = getId("flat_number").value;
+    // obj.owner = getId("owner").value;
+    // obj.co_owner = getId("co_owner").value;
+    // obj.mobile_1 = getId("mobile_1").value;
+    // obj.mobile_2 = getId("mobile_2").value;
+    // obj.email_1 = getId("email_1").value;
+    // obj.email_2 = getId("email_2").value;
 
     var xhr = new XMLHttpRequest();
     xhr.onload = handler;
@@ -122,11 +136,13 @@ function reloadData() {
 
 
 function search() {
+    // 
     var num = getId("search").value.trim();
     var fill = "*N/A*";
 
     if (Contacts.hasOwnProperty(num)) {
         var contact = Contacts[num];
+        getId("add_contact").style.display = "none";
 
         function onReadDetail() {
             if (this.status == 200) {
@@ -155,7 +171,8 @@ function search() {
         xhr.send();
 
     } else {
-        alert("No found");
+        getId("add_contact").style.display = "block";
+        getId("result").innerHTML = "";
     }
 
 }
