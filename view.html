@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DS MAX SAANJH</title>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#24292e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center " style="padding:2%;">
+            <h3>Ds Max Saanjh</h3>
+            <h4>List of Owners (<span id="count"></span>) </h4>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="view_table" class="table table-condensed table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Flat No</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="index.html" class="btn btn-primary form-control">Home</a>
+    </div>
+
+    <footer class="footer navbar-fixed-bottom">
+    </footer>
+</body>
+<script>
+    function view() {
+        var table = document.getElementById("view_table");
+
+        function handler() {
+            if (this.status == 200) {
+                // success!
+                var rawdata = this.response;
+                // getId("status").innerText = rawdata;
+                var arr = JSON.parse(rawdata);
+                var count = 0;
+                arr.sort(function(a, b) {
+                    return a.flat_number - b.flat_number;
+                });
+                for (var index in arr) {
+                    var number = arr[index].flat_number;
+                    var owner = arr[index].owner;
+                    if (arr[index].co_owner)
+                        owner += " & " + arr[index].co_owner;
+                    count++;
+                    var tr = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    td1.style.textAlign = "center";
+                    var td2 = document.createElement("td");
+                    var str = "" + number;
+                    var pad = "000";
+                    var ans = pad.substring(0, pad.length - str.length) + str;
+                    var flat = document.createTextNode(ans);
+
+                    td1.appendChild(flat);
+                    var name = document.createTextNode(owner);
+                    td2.appendChild(name);
+
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    //table.appendChild(tr);
+                    document.getElementById("view_table").getElementsByTagName("tbody")[0].appendChild(tr);
+                }
+                getId("count").innerText = count;
+
+
+            } else {
+
+            }
+        }
+        var apiEndPointUrl = "https://dsmax.herokuapp.com";
+        var xhr = new XMLHttpRequest();
+        xhr.onload = handler;
+        //xhr.open('GET', 'http://github.sunnysinghdev.com/BhandaraScooters/WebAngular/inv_parts.json', false);
+        xhr.open('GET', apiEndPointUrl + '/dsmax/db/all');
+        xhr.send();
+
+    }
+
+    function getId(id) {
+        return document.getElementById(id);
+    }
+    $(document).ready(function() {
+        view();
+    });
+</script>
+
+</html>
