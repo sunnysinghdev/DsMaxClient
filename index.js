@@ -36,7 +36,7 @@ function userLoggedIn(email, token, imgUrl) {
             localStorage.setItem("flat_number", user.flat_number);
 
             window.location.href = "home.html";
-            reloadData();
+            //reloadData();
         } else {
 
         }

@@ -1,6 +1,6 @@
 var Utils = {};
 
-function getId(id) {
+Utils.getId = function(id) {
     return document.getElementById(id);
 };
 
@@ -23,10 +23,11 @@ function signOut() {
     });
 };
 
-function displayNavbar() {
+function displayNavbar(callback) {
     function handler() {
         if (this.status = 200) {
-            getId("global_navbar").innerHTML = this.response;
+            Utils.getId("global_navbar").innerHTML = this.response;
+            callback();
         }
     }
     var xhr = new XMLHttpRequest();

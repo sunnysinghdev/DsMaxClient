@@ -109,7 +109,7 @@
 
                     document.getElementById("view_table").getElementsByTagName("tbody")[0].appendChild(tr);
                 }
-                getId("count").innerText = count;
+                document.getElementById("count").innerText = count;
 
 
             } else {
@@ -128,17 +128,16 @@
 
     }
 
-    function getId(id) {
-        return document.getElementById(id);
-    }
+
     $(document).ready(function() {
+        displayNavbar();
+
         loadUser("member");
         console.log(localStorage.getItem("token_id"));
         Utils.getConfig(function(config) {
             view(config.apiEndPointUrl);
         });
     });
-    displayNavbar();
 </script>
 
 </html>
