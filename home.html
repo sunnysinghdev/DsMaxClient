@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DS MAX SAANJH</title>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#24292e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta name="google-signin-client_id" content="467349137922-9guhp2g27h7rqs4or0n9nhem9m7enub7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div id="global_navbar"></div>
+    <div class="container">
+        <div class="row" style="padding-bottom:15px;">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input type="nubmer" class="form-control" id="search" placeholder="Flat Number" value="">
+                    <span class="input-group-addon" onclick="search();"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
+            </div>
+        </div>
+        <div id="result"></div>
+        <hr/>
+        <h4>Notice</h4>
+        <p>A new feature will be added to post important notices here on this website.</p>
+    </div>
+    <footer class="footer navbar-fixed-bottom">
+    </footer>
+</body>
+<script>
+    displayNavbar();
+    $(document).ready(function() {
+        loadUser("home");
+
+    });
+    //localStorage.setItem("token_id", "XXYYZZ2");
+</script>
+
+</html>

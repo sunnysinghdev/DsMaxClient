@@ -13,42 +13,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-
-    </style>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
 
 </head>
 
 <body>
+    <div id="global_navbar"></div>
     <div class="container">
-        <div class="jumbotron text-center " style="padding:2%;">
-            <h3>Ds Max Saanjh</h3>
-            <h4>List of Owners (<span id="count"></span>) </h4>
-        </div>
-        <hr>
         <div class="row">
             <div class="col-sm-12">
-                <table id="view_table" class="table table-condensed table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Flat No</th>
-                            <th>Owner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <h4>List of Owners (<span id="count"></span>) </h4>
+                <div class="table-responsivee" style="width:100%;overflow-y:scroll;">
+                    <table id="view_table" class="table table-condensed table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Flat No</th>
+                                <th>Owner</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <a href="index.html" class="btn btn-primary form-control">Home</a>
     </div>
 
     <footer class="footer navbar-fixed-bottom">
     </footer>
 </body>
 <script>
-    function view() {
+    function view(apiEndPointUrl) {
         var table = document.getElementById("view_table");
+        if (localStorage.getItem("role_type") == "admin") {
+            var thead = document.getElementById("view_table").getElementsByTagName("thead")[0];
+            var th_tr = thead.getElementsByTagName("tr")[0];
+            var th1 = document.createElement("th");
+            var th2 = document.createElement("th");
+            var col1 = document.createTextNode("Mobile");
+            var col2 = document.createTextNode("Email");
+            th1.appendChild(col1);
+            th2.appendChild(col2);
+            th_tr.appendChild(th1);
+            th_tr.appendChild(th2);
+        }
 
         function handler() {
             if (this.status == 200) {
@@ -81,7 +91,22 @@
 
                     tr.appendChild(td1);
                     tr.appendChild(td2);
-                    //table.appendChild(tr);
+                    if (localStorage.getItem("role_type") == "admin") {
+                        var thead = document.getElementById("view_table").getElementsByTagName("thead")[0];
+                        var th_tr = thead.getElementsByTagName("tr")[0];
+
+                        var td3 = document.createElement("td");
+                        var phone = document.createTextNode(arr[index].mobile_1 + " / " + arr[index].mobile_2);
+                        td3.appendChild(phone);
+
+                        var td4 = document.createElement("td");
+                        var email = document.createTextNode(arr[index].email_1 + " / " + arr[index].email_2);
+                        td4.appendChild(email);
+                        tr.appendChild(td3);
+                        tr.appendChild(td4);
+
+                    }
+
                     document.getElementById("view_table").getElementsByTagName("tbody")[0].appendChild(tr);
                 }
                 getId("count").innerText = count;
@@ -91,12 +116,15 @@
 
             }
         }
-        var apiEndPointUrl = "https://dsmax.herokuapp.com";
+        var req = {};
+        req.token_id = localStorage.getItem("token_id");
         var xhr = new XMLHttpRequest();
         xhr.onload = handler;
         //xhr.open('GET', 'http://github.sunnysinghdev.com/BhandaraScooters/WebAngular/inv_parts.json', false);
-        xhr.open('GET', apiEndPointUrl + '/dsmax/db/all');
-        xhr.send();
+        xhr.open('POST', apiEndPointUrl + '/dsmax/db/all');
+        xhr.setRequestHeader('Content-type', 'application/json');
+
+        xhr.send(JSON.stringify(req));
 
     }
 
@@ -104,8 +132,13 @@
         return document.getElementById(id);
     }
     $(document).ready(function() {
-        view();
+        loadUser("member");
+        console.log(localStorage.getItem("token_id"));
+        Utils.getConfig(function(config) {
+            view(config.apiEndPointUrl);
+        });
     });
+    displayNavbar();
 </script>
 
 </html>

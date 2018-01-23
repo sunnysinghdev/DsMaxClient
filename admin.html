@@ -12,16 +12,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="index.js?zxz"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
 </head>
 
 <body>
+    <div id="global_navbar"></div>
     <div class="container">
-        <div class="jumbotron text-center " style="padding:2%;">
-            <h2>Admin</h2>
-            <h4>Contact list (<span id="count"></span>) </h4>
-        </div>
-        <hr>
         <div class="row" style="padding-bottom:15px;">
             <div class="col-xs-12">
                 <div class="input-group">
@@ -33,7 +31,7 @@
 
 
 
-        <div id="add_detail" style="">
+        <div id="add_detail">
             <h4>Update details</h4>
 
             <div class="well">
@@ -95,5 +93,12 @@
 
     </footer>
 </body>
+<script>
+    displayNavbar();
+    $(document).ready(function() {
+        loadUser("admin");
+
+    });
+</script>
 
 </html>

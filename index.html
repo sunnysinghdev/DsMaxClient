@@ -13,31 +13,53 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-
+    <meta name="google-signin-client_id" content="467349137922-9guhp2g27h7rqs4or0n9nhem9m7enub7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="utils.js"></script>
     <script src="index.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron text-center " style="padding:2%;">
-            <h3>Ds Max Saanjh</h3>
-            <h4><a href="view.html">View member list (<span id="count"></span>)</a> </h4>
+            <h3 style="margin-top:0px;">Ds Max Saanjh</h3>
+            <p style="font-size:12px;">A residential apartment at Akshaya nagar.</p>
         </div>
         <hr>
-        <div class="row" style="padding-bottom:15px;">
 
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="nubmer" class="form-control" id="search" placeholder="Flat Number" value="">
-                    <span class="input-group-addon" onclick="search();"><i class="glyphicon glyphicon-search"></i></span>
-                </div>
+        <div class="row">
+            <div class="col-xs-3">
             </div>
-        </div>
 
-        <div id="result"></div>
-        <div id="add_contact" class="row" style="display:none;">
+            <div class="col-xs-3">
+            </div>
+            <script>
+                function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function() {
+                        console.log('User signed out.');
+                    });
+                }
+
+                function onSignIn(googleUser) {
+                    //console.log(JSON.stringify(googleUser));
+                    var profile = googleUser.getBasicProfile();
+                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                    console.log('Name: ' + profile.getName());
+                    console.log('Image URL: ' + profile.getImageUrl());
+                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                    var id_token = googleUser.getAuthResponse().id_token;
+                    console.log("ID Token: " + id_token);
+                    userLoggedIn(profile.getEmail(), id_token, profile.getImageUrl());
+
+                }
+            </script>
+        </div>
+        <div id="add_contact" class="row" style="display:block;">
+
             <div class="col-xs-12">
-                <h4>Please add yor detail</h4>
+                <h4 style="text-align:center;">Please add yor detail</h4>
+
                 <div class="well">
                     <div class="row">
                         <h5>Flat Number</h5>
@@ -79,18 +101,22 @@
                             <input id="email_2" placeholder="Email Address" class="form-control" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <p></p>
-                        <button id="login_submit" type="submit" class="btn btn-primary form-control" onclick="add();">Add</button>
 
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button id="login_submit" type="submit" class="btn btn-success form-control" onclick="add();">Register</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="g-signin2" data-width="150" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-
-    </div>
+    <hr/>
     <footer class="footer navbar-fixed-bottom">
     </footer>
 </body>

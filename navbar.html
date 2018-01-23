@@ -1,0 +1,42 @@
+<style>
+    .navbar-collapse.collapse {
+        display: block!important;
+    }
+    
+    .navbar-nav>li,
+    .navbar-nav {
+        float: left !important;
+    }
+    
+    .navbar-nav.navbar-right:last-child {
+        margin-right: -15px !important;
+    }
+    
+    .navbar-right {
+        float: right!important;
+    }
+</style>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Ds Max Saanjh</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li id="list_home" class="active"><a href="home.html">Home</a></li>
+            <li id="list_member"><a href="view.html">Members</a></li>
+            <li id="list_admin" style="display:none;"><a href="admin.html">Admin</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" style="padding-right:0px;">
+                    <span id="nav_flat_number"></span>
+                    <img id="nav_image" src="" style="border-radius:50%;" height="25px" width="25px" />
+                </a>
+            </li>
+            <li>
+                <a href="logout.html"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+    </div>
+
+</nav>
