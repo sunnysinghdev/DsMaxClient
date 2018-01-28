@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="utils.js"></script>
-    <script src="app.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
 <body>
@@ -29,28 +29,51 @@
             </div>
         </div>
         <div id="result"></div>
-        <hr/>
-        <h4>Notice</h4>
-        <p>A new feature will be added to post important notices here on this website.</p>
+        <hr>
+
+        <div id="posts" class="row">
+
+        </div>
+        <div class="row" style="height:50px;"></div>
     </div>
-    <footer class="footer navbar-fixed-bottom">
+
+    </div>
+
+    <footer id="footer" class="footer navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12" style="padding-bottom:5px;">
+                    <div class="input-group">
+
+                        <textarea id="text_post" style="padding:0px 5px;" class="form-control" rows="2" placeholder="Enter new post"></textarea>
+                        <span class="input-group-addon" onclick="App.sendPost();"><i class="glyphicon glyphicon-send"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 </body>
 <script>
+    function getPostWait() {
+        if (!App.dataLoaded) {
+            setTimeout(function() {
+                getPostWait();
+                console.log(App.dataLoaded);
+            }, 2000);
+        } else
+            App.getAllPost();
+
+
+    };
     $(document).ready(function() {
 
         displayNavbar(function() {
             loadUser("home");
+            getPostWait();
+            //App.getAllPost();
 
         });
     });
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // loadUser("home");
-
-    });
-    //localStorage.setItem("token_id", "XXYYZZ2");
 </script>
 
 </html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DS MAX SAANJH</title>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#24292e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="google-signin-client_id" content="467349137922-9guhp2g27h7rqs4or0n9nhem9m7enub7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                console.log('User signed out.');
+            });
+        }
+
+        function onSignIn(googleUser) {
+            //console.log(JSON.stringify(googleUser));
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+            userLoggedIn(profile.getEmail(), id_token, profile.getImageUrl());
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center " style="padding:2%;">
+            <h3 style="margin-top:0px;">Ds Max Saanjh</h3>
+            <p style="font-size:12px;">A residential apartment at Akshaya nagar.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <hr>
+
+                <h3>About</h3>
+                <p>This website is created and maintained by <a href="sunnysinghdev.com">sunnysinghdev.com</a>. It helps Ds Max Saajnh community group to view important notices and information related to this community only.
+                </p>
+            </div>
+            <div class="col-sm-8">
+                <hr>
+
+                <h3>Technologies used for this website.</h3>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="https://nodejs.org/en/about/" target="_blank">
+                            <div class="thumbnail">
+                                <img src="https://nodejs.org/static/images/logo.svg" style="height:50px">
+                                <div class="caption">
+                                    <p>Server: NodeJs</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a href="https://github.com" target="_blank">
+                            <div class="thumbnail">
+                                <img src="images/github_logo.png" style="height:50px">
+                                <div class="caption">
+                                    <p>Source Control: GitHub</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="https://www.mongodb.com/" target="_blank">
+                            <div class="thumbnail">
+                                <img src="images/mongodb_logo.png" style="height:50px">
+                                <div class="caption">
+                                    <p>Database: Mongodb</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-2">
+                <h3>Contact us</h3>
+                <p>
+                    <a href="mailto:sunnysinghdevcom@gmail.com?subject='Ds Max Saanjh Community query'" target="_top">Send Email</a></p>
+            </div>
+        </div>
+        <hr>
+
+        <footer class="footer text-center">
+            <p>2018 &copy; sunnysinghdev.com</p>
+        </footer>
+</body>
+
+</html>

@@ -12,11 +12,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <meta name="google-signin-client_id" content="467349137922-9guhp2g27h7rqs4or0n9nhem9m7enub7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="utils.js"></script>
-    <script src="index.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                console.log('User signed out.');
+            });
+        }
+
+        function onSignIn(googleUser) {
+            //console.log(JSON.stringify(googleUser));
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+            userLoggedIn(profile.getEmail(), id_token, profile.getImageUrl());
+
+        }
+    </script>
 </head>
 
 <body>
@@ -26,38 +48,31 @@
             <p style="font-size:12px;">A residential apartment at Akshaya nagar.</p>
         </div>
         <hr>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="thumbnail" style="border-left:5px solid red;">
+                    <p> Make sure you have an <b>Gmail </b> <i class="glyphicon glyphicon-envelope"></i> account for login.</p>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-12">
+                <hr>
+
+                <div class="thumbnail card">
+                    <img src="images/group_visit.png" class="img-rounded" width="100%" />
+                    <div class="caption">
+                        <p>Flat owner's meet at construction site.</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-xs-3">
-            </div>
-            <script>
-                function signOut() {
-                    var auth2 = gapi.auth2.getAuthInstance();
-                    auth2.signOut().then(function() {
-                        console.log('User signed out.');
-                    });
-                }
-
-                function onSignIn(googleUser) {
-                    //console.log(JSON.stringify(googleUser));
-                    var profile = googleUser.getBasicProfile();
-                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                    console.log('Name: ' + profile.getName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-                    var id_token = googleUser.getAuthResponse().id_token;
-                    console.log("ID Token: " + id_token);
-                    userLoggedIn(profile.getEmail(), id_token, profile.getImageUrl());
-
-                }
-            </script>
         </div>
         <div id="add_contact" class="row" style="display:block;">
 
             <div class="col-xs-12">
+                <hr>
+
                 <h4 style="text-align:center;">Please add yor detail</h4>
 
                 <div class="well">
@@ -109,15 +124,16 @@
                         <button id="login_submit" type="submit" class="btn btn-success form-control" onclick="add();">Register</button>
                     </div>
                     <div class="col-xs-6">
-                        <div class="g-signin2" data-width="150" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>
+                        <div class="g-signin2" data-width="160" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-    <hr/>
-    <footer class="footer navbar-fixed-bottom">
+    <hr>
+    <footer class="footer text-center">
+        <p><a href="about.html">About Us</a></p>
     </footer>
 </body>
 

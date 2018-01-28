@@ -1,5 +1,8 @@
 var Utils = {};
-
+Utils.getMonth = function(index) {
+    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return month[index];
+}
 Utils.getId = function(id) {
     return document.getElementById(id);
 };
@@ -12,7 +15,27 @@ Utils.getConfig = function(callback) {
     }
     var xhr = new XMLHttpRequest();
     xhr.onload = handler;
-    xhr.open('GET', 'config.json');
+    xhr.open('GET', 'config/config.json');
+    xhr.send();
+};
+Utils.getFlatNumber = function() {
+    return parseInt(localStorage.getItem("flat_number"));
+};
+Utils.getRoleType = function() {
+    return localStorage.getItem("role_type");
+};
+Utils.getToken = function() {
+    return localStorage.getItem("token_id");
+};
+Utils.getHtml = function(filename, callback) {
+    function handler() {
+        if (this.status = 200) {
+            callback(this.response);
+        }
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onload = handler;
+    xhr.open('GET', filename);
     xhr.send();
 };
 

@@ -1,0 +1,18 @@
+<div class="col-sm-4">
+    <div class="thumbnail card">
+        <div class="row">
+            <div class="col-sm-12">
+                <p style="border-bottom:1px solid lightgrey;margin-bottom:2px;">
+                    <span class="badge">$post_id</span> $post_content </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10">
+                <small style="font-size:10px;">Posted by: <b> $posted_by </b> on $post_date.</small>
+            </div>
+            <div class="col-xs-2" style="padding-top:0px;display:$post_delete">
+                <a href="#" onclick="App.deletePost('$post_id')"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
