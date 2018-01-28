@@ -1,5 +1,5 @@
 {
-    "apiEndPointUrl": "http://dsmax.herokupapp.com",
+    "apiEndPointUrl": "http://dsmax.herokuapp.com",
     "website": "http://github.sunnysinghdev.com/DsMaxClient",
     "version": "v1.0"
 }
